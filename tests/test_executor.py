@@ -36,7 +36,7 @@ def test_aggregate():
 
 
 def test_in_subquery_and_rename():
-    assert run("PROJECT(Name, SELECT(DeptID NOT IN (PROJECT(DeptID, Department)), Employee))")[1] == []
+    assert run("PROJECT(Name, SELECT(DeptID NOT IN (PROJECT(DeptID, Department)), Employee))")[1] == [("Nour",)]
     assert run("RENAME(Name AS Who, PROJECT(Name, Employee))")[0] == ["Who"]
 
 

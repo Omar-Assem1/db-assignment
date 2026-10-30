@@ -26,3 +26,11 @@ RENAME(Name AS EmpName, PROJECT(Name, Employee))
 -- subquery
 SELECT(DeptID IN (PROJECT(DeptID, Department)), Employee)
 SELECT(DeptID NOT IN (10, 20), Employee)
+-- nested operators
+PROJECT(Name, DeptName, SELECT(Salary > 4000, JOIN(Employee, Department)))
+
+-- nested subquery
+SELECT(DeptID IN (PROJECT(DeptID, SELECT(DeptName = 'IT', Department))), Employee)
+
+-- two levels of subquery
+SELECT(DeptID IN (PROJECT(DeptID, SELECT(DeptName IN (PROJECT(DeptName, Department)), Department))), Employee)
