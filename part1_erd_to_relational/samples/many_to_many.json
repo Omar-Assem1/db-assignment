@@ -1,0 +1,28 @@
+{
+  "entities": [
+    {
+      "name": "Student",
+      "attributes": [
+        { "name": "StudentID", "isPrimaryKey": true },
+        { "name": "Name", "composite": ["FirstName", "LastName"] },
+        { "name": "Email", "isMultiValued": true }
+      ]
+    },
+    {
+      "name": "Course",
+      "attributes": [
+        { "name": "CourseID", "isPrimaryKey": true },
+        { "name": "Title" }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "Enrolled",
+      "entity1": "Student",
+      "entity2": "Course",
+      "cardinality": "M:N",
+      "attributes": [{ "name": "Grade" }]
+    }
+  ]
+}
