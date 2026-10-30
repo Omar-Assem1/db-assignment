@@ -32,7 +32,7 @@ def _label(table: Table) -> str:
         bg = f' BGCOLOR="{PK_BG}"' if c.is_pk else ""
         rows.append(
             f'<TR><TD PORT="{_id(c.name)}" ALIGN="LEFT"{bg}>{name}</TD>'
-            f'<TD>{tag_html}</TD></TR>'
+            f'<TD PORT="{_id(c.name)}_r">{tag_html}</TD></TR>'
         )
     return ('<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">'
             + "".join(rows) + "</TABLE>>")
@@ -50,8 +50,8 @@ def build_graph(tables: list[Table]) -> graphviz.Digraph:
     for t in tables:
         for fk in t.foreign_keys:
             for col, ref_col in zip(fk.columns, fk.ref_columns):
-                dot.edge(f"{_id(t.name)}:{_id(col)}:e", f"{_id(fk.ref_table)}:{_id(ref_col)}:w")
-                return dot
+                dot.edge(f"{_id(t.name)}:{_id(col)}_r", f"{_id(fk.ref_table)}:{_id(ref_col)}")
+    return dot
 
 
 def render_schema(tables: list[Table], out_dir: str, stem: str,

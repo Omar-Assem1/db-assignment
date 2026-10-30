@@ -1,0 +1,6 @@
+{
+  "Employee": {"columns": ["EmpID", "Name", "Salary", "DeptID"],
+               "rows": [[1, "Ali", 6000, 10], [2, "Sara", 4500, 10], [3, "Omar", 7000, 20], [4, "Nour", 3000, null]]},
+  "Department": {"columns": ["DeptID", "DeptName"],
+                 "rows": [[10, "IT"], [20, "HR"], [30, "Finance"]]}
+}
