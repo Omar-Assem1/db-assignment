@@ -1,0 +1,12 @@
+digraph relational_schema {
+	fontname=Helvetica nodesep=0.6 rankdir=LR ranksep=1.2
+	node [fontname=Helvetica shape=plaintext]
+	edge [arrowhead=normal color="#444444"]
+	Student [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD COLSPAN="2" BGCOLOR="#2b5797"><FONT COLOR="white"><B>Student</B></FONT></TD></TR><TR><TD PORT="StudentID" ALIGN="LEFT" BGCOLOR="#fff2cc"><U>StudentID</U></TD><TD><FONT POINT-SIZE="9" COLOR="#555555">PK</FONT></TD></TR><TR><TD PORT="FirstName" ALIGN="LEFT">FirstName</TD><TD><FONT POINT-SIZE="9" COLOR="#555555"></FONT></TD></TR><TR><TD PORT="LastName" ALIGN="LEFT">LastName</TD><TD><FONT POINT-SIZE="9" COLOR="#555555"></FONT></TD></TR></TABLE>>]
+	Course [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD COLSPAN="2" BGCOLOR="#2b5797"><FONT COLOR="white"><B>Course</B></FONT></TD></TR><TR><TD PORT="CourseID" ALIGN="LEFT" BGCOLOR="#fff2cc"><U>CourseID</U></TD><TD><FONT POINT-SIZE="9" COLOR="#555555">PK</FONT></TD></TR><TR><TD PORT="Title" ALIGN="LEFT">Title</TD><TD><FONT POINT-SIZE="9" COLOR="#555555"></FONT></TD></TR></TABLE>>]
+	Student_Email [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD COLSPAN="2" BGCOLOR="#2b5797"><FONT COLOR="white"><B>Student_Email</B></FONT></TD></TR><TR><TD PORT="StudentID" ALIGN="LEFT" BGCOLOR="#fff2cc"><U>StudentID</U></TD><TD><FONT POINT-SIZE="9" COLOR="#555555">PK, FK</FONT></TD></TR><TR><TD PORT="Email" ALIGN="LEFT" BGCOLOR="#fff2cc"><U>Email</U></TD><TD><FONT POINT-SIZE="9" COLOR="#555555">PK</FONT></TD></TR></TABLE>>]
+	Enrolled [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5"><TR><TD COLSPAN="2" BGCOLOR="#2b5797"><FONT COLOR="white"><B>Enrolled</B></FONT></TD></TR><TR><TD PORT="StudentID" ALIGN="LEFT" BGCOLOR="#fff2cc"><U>StudentID</U></TD><TD><FONT POINT-SIZE="9" COLOR="#555555">PK, FK</FONT></TD></TR><TR><TD PORT="CourseID" ALIGN="LEFT" BGCOLOR="#fff2cc"><U>CourseID</U></TD><TD><FONT POINT-SIZE="9" COLOR="#555555">PK, FK</FONT></TD></TR><TR><TD PORT="Grade" ALIGN="LEFT">Grade</TD><TD><FONT POINT-SIZE="9" COLOR="#555555"></FONT></TD></TR></TABLE>>]
+	Student_Email:StudentID -> Student:StudentID
+	Enrolled:StudentID -> Student:StudentID
+	Enrolled:CourseID -> Course:CourseID
+}
