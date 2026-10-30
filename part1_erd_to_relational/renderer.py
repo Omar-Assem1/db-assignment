@@ -26,10 +26,13 @@ def _label(table: Table) -> str:
         if c.is_pk:
             name = f"<U>{name}</U>"
         tag = ", ".join(t for t, on in (("PK", c.is_pk), ("FK", c.is_fk)) if on)
+        # Graphviz rejects an empty <FONT></FONT>, so use a non-breaking space instead
+        tag_html = (f'<FONT POINT-SIZE="9" COLOR="#555555">{tag}</FONT>'
+                    if tag else "&nbsp;")
         bg = f' BGCOLOR="{PK_BG}"' if c.is_pk else ""
         rows.append(
             f'<TR><TD PORT="{_id(c.name)}" ALIGN="LEFT"{bg}>{name}</TD>'
-            f'<TD><FONT POINT-SIZE="9" COLOR="#555555">{tag}</FONT></TD></TR>'
+            f'<TD>{tag_html}</TD></TR>'
         )
     return ('<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">'
             + "".join(rows) + "</TABLE>>")
