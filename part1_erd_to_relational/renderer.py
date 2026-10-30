@@ -50,8 +50,8 @@ def build_graph(tables: list[Table]) -> graphviz.Digraph:
     for t in tables:
         for fk in t.foreign_keys:
             for col, ref_col in zip(fk.columns, fk.ref_columns):
-                dot.edge(f"{_id(t.name)}:{_id(col)}", f"{_id(fk.ref_table)}:{_id(ref_col)}")
-    return dot
+                dot.edge(f"{_id(t.name)}:{_id(col)}:e", f"{_id(fk.ref_table)}:{_id(ref_col)}:w")
+                return dot
 
 
 def render_schema(tables: list[Table], out_dir: str, stem: str,
