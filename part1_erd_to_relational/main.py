@@ -1,13 +1,10 @@
 from __future__ import annotations
-
 import argparse
 import sys
 from pathlib import Path
 
-import graphviz
-
 from erd_loader import load_erd
-from renderer import render_schema
+from mpl_renderer import render_schema_mpl
 from transformer import transform
 
 
@@ -17,6 +14,8 @@ def main(argv=None) -> int:
     p.add_argument("-o", "--out-dir", default="output", help="output directory (default: output)")
     p.add_argument("-n", "--name", help="output file name without extension (default: input file name)")
     p.add_argument("--no-render", action="store_true", help="only print the schema as text")
+    p.add_argument("--engine", choices=["matplotlib", "graphviz"], default="matplotlib",
+                   help="drawing backend (default: matplotlib)")
     args = p.parse_args(argv)
 
     try:
@@ -33,12 +32,17 @@ def main(argv=None) -> int:
         return 0
 
     stem = args.name or Path(args.erd).stem
-    try:
-        files = render_schema(tables, args.out_dir, stem)
-    except graphviz.ExecutableNotFound:
-        print("\nError: Graphviz binary not found. Install it and make sure `dot` is on PATH.",
-              file=sys.stderr)
-        return 2
+    if args.engine == "graphviz":
+        import graphviz
+        from renderer import render_schema
+        try:
+            files = render_schema(tables, args.out_dir, stem)
+        except graphviz.ExecutableNotFound:
+            print("\nError: Graphviz binary not found. Install it and make sure `dot` is on PATH.",
+                  file=sys.stderr)
+            return 2
+    else:
+        files = render_schema_mpl(tables, args.out_dir, stem)
 
     print("\nGenerated:")
     for f in files:
