@@ -1,0 +1,28 @@
+-- show a whole table
+Employee
+
+-- SELECT and PROJECT
+SELECT(Salary >= 5000, Employee)
+PROJECT(Name, Salary, Employee)
+PROJECT(Name, SELECT(Salary >= 5000 AND DeptID = 10, Employee))
+σ(Salary >= 5000, Employee)                       -- symbol alias
+
+-- JOIN (natural join; Nour has a NULL DeptID so she is dropped)
+JOIN(Employee, Department)
+PROJECT(Name, DeptName, JOIN(Employee, Department))
+
+-- set operations
+UNION(PROJECT(DeptID, Department), PROJECT(DeptID, Employee))
+INTERSECT(PROJECT(DeptID, Department), PROJECT(DeptID, Employee))
+DIFFERENCE(PROJECT(DeptID, Department), PROJECT(DeptID, Employee))
+
+-- AGGREGATE
+AGGREGATE(DeptID; COUNT(*) AS n, AVG(Salary), Employee)
+AGGREGATE(; COUNT(*) AS total, MAX(Salary), Employee)
+
+-- RENAME
+RENAME(Name AS EmpName, PROJECT(Name, Employee))
+
+-- subquery
+SELECT(DeptID IN (PROJECT(DeptID, Department)), Employee)
+SELECT(DeptID NOT IN (10, 20), Employee)

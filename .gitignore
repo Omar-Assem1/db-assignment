@@ -2,4 +2,4 @@ __pycache__/
 .venv/
 .pytest_cache/
 *.gv
-.DS_Store
+.DS_Store.idea/
